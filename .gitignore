@@ -1,0 +1,7 @@
+# Ignore pycharm configuration
+/.idea
+
+# Ignore pynative and ipynb
+/.ipynb_checkpoints
+/.pynative
+*.ipynb
