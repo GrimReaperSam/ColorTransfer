@@ -11,5 +11,23 @@ $(document).ready(function() {
             };
             reader.readAsDataURL(input.files[0]);
         }
-    })
+    });
+
+    $('.transfer-button').click(function() {
+        var form_data = new FormData($('.transfer-form')[0]);
+        $.ajax({
+            url: '/tran',
+            type: 'POST',
+            data: form_data,
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function(response) {
+                img = JSON.parse(response).img
+                $('#transfer-image')
+                    .attr('src', 'data:image/jpeg;base64,' + img)
+                    .width(300)
+            }
+        });
+    });
 });
