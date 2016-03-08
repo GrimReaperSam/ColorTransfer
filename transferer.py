@@ -5,11 +5,7 @@ import cStringIO
 import base64
 
 
-def transfer(source_path, target_path, transfer_path):
-    transfer_cv2(cv2.imread(source_path), cv2.imread(target_path), transfer_path)
-
-
-def transfer_cv2(source, target, transfer_path):
+def transfer_cv2(source, target):
     source = cv2.cvtColor(source, cv2.COLOR_BGR2LAB).astype('float32')
     target = cv2.cvtColor(target, cv2.COLOR_BGR2LAB).astype('float32')
 
@@ -35,7 +31,6 @@ def transfer_cv2(source, target, transfer_path):
     b = np.clip(b, 0, 255)
 
     res = cv2.cvtColor(cv2.merge([l, a, b]).astype('uint8'), cv2.COLOR_LAB2BGR)
-    cv2.imwrite(transfer_path, res)
 
     cv2_im = cv2.cvtColor(res, cv2.COLOR_BGR2RGB)
     pil_im = Image.fromarray(cv2_im)

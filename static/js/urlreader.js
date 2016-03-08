@@ -1,4 +1,6 @@
 $(document).ready(function() {
+    $('img').hide();
+
     $('.upload-image').change(function() {
         var input = this;
         if (input.files && input.files[0]) {
@@ -7,7 +9,8 @@ $(document).ready(function() {
             reader.onload = function(e) {
                 $('#' + name + '-image')
                     .attr('src', e.target.result)
-                    .width(300);
+                    .width(300)
+                    .show();
             };
             reader.readAsDataURL(input.files[0]);
         }
@@ -16,7 +19,7 @@ $(document).ready(function() {
     $('.transfer-button').click(function() {
         var form_data = new FormData($('.transfer-form')[0]);
         $.ajax({
-            url: '/tran',
+            url: '/transfer',
             type: 'POST',
             data: form_data,
             contentType: false,
@@ -27,6 +30,7 @@ $(document).ready(function() {
                 $('#transfer-image')
                     .attr('src', 'data:image/jpeg;base64,' + img)
                     .width(300)
+                    .show()
             }
         });
     });
