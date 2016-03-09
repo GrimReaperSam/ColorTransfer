@@ -131,4 +131,3 @@ xlrd==0.9.4
 XlsxWriter==0.8.4
 xlwt==1.0.0
 yarg==0.1.9
-zbar==0.10
