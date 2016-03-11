@@ -8,6 +8,8 @@ import urllib, cStringIO
 from PIL import Image
 import numpy as np
 import cv2
+from PIL import Image
+import base64
 
 
 UPLOAD_FOLDER = 'static'
@@ -27,7 +29,12 @@ def transfer():
     target = request.files['target']
     source = _fs_to_cv2(source)
     target = _fs_to_cv2(target)
-    b64 = transferer.transfer_cv2(source, target)
+    cvim = transferer.transfer_cv2(source, target)
+
+    pil_im = Image.fromarray(cv2.cvtColor(cvim, cv2.COLOR_BGR2RGB))
+    buff = cStringIO.StringIO()
+    pil_im.save(buff, format="JPEG")
+    b64 = base64.b64encode(buff.getvalue())
     return json.dumps({'status': 'OK', 'img': b64})
 
 
